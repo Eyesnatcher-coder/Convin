@@ -35,7 +35,15 @@ const Paruser = ({ id, bucketname, no_of_videos, videos }) => {
     })
 
 
-    const [deleteingcard,deleteingcardfunc] = useState([]);
+    // const [deleteingcard,deleteingcardfunc] = useState([]);
+    const [deleteingcard,deleteingcardfunc] = useState([{
+        _id:"",
+        nameofvideo:"",
+        link:""
+    }
+    ]
+    );
+
 
 
     const handleChange = (event) => {

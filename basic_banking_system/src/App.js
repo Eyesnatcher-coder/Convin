@@ -9,7 +9,7 @@ import GridcustomerList from './components/customerList/gridcustomerslist';
 import {logins} from './components/customerList/customerdata';
 import Paruser from './components/User/user';
 import { useState, useEffect } from 'react';
-import History from './components/history/history';
+// import History from './components/history/history';
 
 
 

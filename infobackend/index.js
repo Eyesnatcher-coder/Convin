@@ -79,8 +79,15 @@ app.post("/makebucket", (req, res) => {
 
 app.put("/makebucket", async (req, res) => {
     const { bucketname, newname } = req.body;
-    await Bucket.findOneAndUpdate({ bucketname: bucketname }, { bucketname: newname }, { new: true })
+    await Bucket.findOneAndUpdate({ bucketname: bucketname }, {'$set':{bucketname: newname} }, { new: true })
     await res.send({ message: "updated bucket name" });
+})
+
+app.put("/cardname/:uid", async (req, res) => {
+    const myid = req.params.uid;
+    const {nameofvideo,newname} = req.body;
+    await Bucket.update({ "videos.nameofvideo": nameofvideo }, { "$set" :{ "videos.$.nameofvideo": newname} })
+    await res.send({ message: "updated cardname name" }); 
 })
 
 app.delete("/makebucket", (req, res, next) => {
@@ -92,10 +99,14 @@ app.delete("/makebucket", (req, res, next) => {
 })
 
 
+
 app.post("/customerlist/:uid", async (req, res) => {
     const _id = req.params.uid;
     var card = { nameofvideo: req.body.nameofvideo, link: req.body.link };
+    var lengthofarray= await Bucket.findOne({_id:_id}).exec();
+    console.log(lengthofarray);
     await Bucket.findOneAndUpdate({ _id: _id }, { $push: { videos: card } }, { new: true })
+    await Bucket.findOneAndUpdate({ _id: _id }, { $set: { no_of_videos:lengthofarray.videos.length} })
     await res.send({ message: "updated array with card" });
 
     // console.log(_id);
@@ -105,21 +116,16 @@ app.post("/customerlist/:uid", async (req, res) => {
 app.post("/customerlist/d/:uid", async (req, res) => {
     const myid = req.params.uid;
     const arr = req.body;
-    try {
-            Bucket.videos.pull({_id :{$in: arr}});
-            res.send({ message: `deleted video having id:${req.body[0]}` })
-            console.log(req.body);
+     try {  
+        for(var i=1;i<arr.length;i++){
+        await Bucket.updateMany({},{$pull : {"videos" :{         
+            "_id" : arr[i]._id,"nameofvideo": arr[i].nameofvideo,"link":arr[i].link}}})
+            //  console.log(req.body);
+         }
         }
     catch(err){
         console.log(err)
-    }
-
-    // var cardlist = {_id:req.body.nameofvideo, link:req.body.link};
-    // await Bucket.findOneAndUpdate({_id:_id},{$push:{videos : card}},{new:true})
-    // await res.send({message:"updated array with card"});
-
-    // console.log(_id);
-    // console.log(card);
+    } 
 })
 
 

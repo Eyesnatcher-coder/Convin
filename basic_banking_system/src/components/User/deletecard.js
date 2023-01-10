@@ -15,9 +15,14 @@ function DeleteCard(props) {
                 <div style={{ marginLeft: "auto", display: "flex" }}>
                     <Button onClick={() => {
                         const _id = props.video._id;
-                        const index = deleteingcard.indexOf(_id);
-                        if (index === -1) {
-                            deleteingcard.push(_id);
+                        var m= false;
+                        for(var i=0;i<deleteingcard.length;i++)
+                        if (deleteingcard[i]._id===_id && m===false){
+                            m=true;
+                            break;
+                        }       
+                        if(m!==true){
+                            deleteingcard.push({"_id":props.video._id,"nameofvideo":props.video.nameofvideo,"link":props.video.link});
                         }
                         console.log(deleteingcard);
                         // props.deleteingcardfunc(deleteingcard);
@@ -28,7 +33,7 @@ function DeleteCard(props) {
                     <Button onClick={() => {
                         const _id = props.video._id;
                         for(var i=0;i<deleteingcard.length;i++)
-                            if(deleteingcard[i] === _id){
+                            if(deleteingcard[i]._id === _id){
                                 deleteingcard.splice(i, 1);
                                 break;
                             }
