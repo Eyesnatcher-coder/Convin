@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const fetch_logins = async () => {
-    const res = await axios.get(process.env.REACT_APP_API_URL)
+    const res = await axios.get("http://localhost:3001/yourbuckets")
     return res.data;
 }
 

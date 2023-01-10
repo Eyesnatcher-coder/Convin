@@ -19,7 +19,7 @@ const Home = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link onClick={() => {navigates("/")}} >Home</Nav.Link>
-              <Nav.Link onClick={() => {navigates("/customer")}} >Customers</Nav.Link>
+              <Nav.Link onClick={() => {navigates("/customerlist")}} >Buckets</Nav.Link>
               <Nav.Link onClick={() => {navigates("/transaction_history")}} >Transaction History</Nav.Link>
             </Nav>
             <Nav style={{ display: "block" }}>

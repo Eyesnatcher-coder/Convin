@@ -1,0 +1,16 @@
+.plussign{
+    background-color:orange;
+    padding:10px;
+    border-radius:20px;
+    cursor:pointer;
+    height: 50px;
+    width: 50px;
+}
+
+.plusspan{
+    padding: 5px;
+    margin: 2px;
+    background-color: orange;
+    border-radius: 10px;
+    display:none;
+}
