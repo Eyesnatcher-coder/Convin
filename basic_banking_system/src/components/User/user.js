@@ -3,21 +3,21 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 // import DeleteCard from './deletecard';
-import { logins } from '../customerList/customerdata';
-import { useState, useEffect } from 'react';
+// import { logins } from '../customerList/customerdata';
+import { useState} from 'react';
 import axios from 'axios';
 import Cards from './card';
 import DeleteCard from './deletecard';
 
 
 const Paruser = ({ id, bucketname, no_of_videos, videos }) => {
-    const [users, setUsers] = useState([]);
-    useEffect(() => {
-        async function getUsers() {
-            setUsers(await logins);
-        }
-        getUsers();
-    }, [])
+    // const [users, setUsers] = useState([]);
+    // useEffect(() => {
+    //     async function getUsers() {
+    //         setUsers(await logins);
+    //     }
+    //     getUsers();
+    // }, [])
 
     const [show2, setShow] = useState(false);
     const [show3, setDelete] = useState(false);

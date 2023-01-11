@@ -1,7 +1,6 @@
 import express from "express";
 import mongoose, { isObjectIdOrHexString } from "mongoose";
 import cors from "cors";
-import e from "express";
 
 const port = process.env.PORT || 3001;
 
@@ -109,8 +108,6 @@ app.post("/customerlist/:uid", async (req, res) => {
     await Bucket.findOneAndUpdate({ _id: _id }, { $set: { no_of_videos:lengthofarray.videos.length} })
     await res.send({ message: "updated array with card" });
 
-    // console.log(_id);
-    // console.log(card);
 })
 
 app.post("/customerlist/d/:uid", async (req, res) => {
@@ -122,6 +119,9 @@ app.post("/customerlist/d/:uid", async (req, res) => {
             "_id" : arr[i]._id,"nameofvideo": arr[i].nameofvideo,"link":arr[i].link}}})
             //  console.log(req.body);
          }
+         var lengthofarray= await Bucket.findOne({_id:myid}).exec();
+         const newlength = Math.ceil(lengthofarray.videos.length-(arr.length)/2);
+         await Bucket.findOneAndUpdate({ _id: myid }, { $set: { no_of_videos:newlength} })
         }
     catch(err){
         console.log(err)
@@ -129,69 +129,25 @@ app.post("/customerlist/d/:uid", async (req, res) => {
 })
 
 
-const transaction_money = [];
+const yourClickHistory = [];
 
 
-
-var new_senderaccountno;
-
-app.put("/customerlist/:account", async (req, res) => {
-    console.log(req.body)
-    // Infod.update({"email":req.body.email},{$set:{account:req.body.account, savings:req.body.savings}},{multi: true})
-    new_senderaccountno = req.body.account;
-    await Infod.findOneAndUpdate({ account: req.body.account }, { savings: req.body.savings }, { multi: true })
-    Infod.findOne({ account: req.body.account }, (err, val) => {
-        if (err) {
-            console.log("error here")
-        }
-        else {
-            console.log(val.name);
-        }
-    })
-    res.sendStatus(200)
-})
-
-app.post("/customerlist/*", async (req, res) => {
+app.post("/history", async (req, res) => {
     // console.log(req.body);
-    const { nameofperson, savingvalue } = req.body;
-    var transaction_money_obj = {
-        senderaccountno: new_senderaccountno,
-        recievername: "",
-        amountsend: 0,
-        recieverbalance: 0
+    const { nameofvideo, link , time } = req.body;
+    var historyBlock = {
+        nameofvideo: nameofvideo,
+        link: link,
+        time: time
     }
-    transaction_money_obj.recievername = nameofperson;
-    var balance = 0;
-    Infod.findOne({ name: { $all: nameofperson } }, (err, val) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            balance = val.savings;
-            balance = balance + savingvalue;
-            transaction_money_obj.recieverbalance = balance;
-            transaction_money_obj.amountsend = savingvalue;
-            Infod.findOneAndUpdate({ name: { $all: nameofperson } }, { $set: { savings: balance } }, (err2, val2) => {
-                if (err2) {
-                    console.log(err2)
-                }
-                else {
-                    // console.log("hooray");
-                }
-            })
-            // console.log(nameofperson,balance);
-            balance = 0;
-            transaction_money.push(transaction_money_obj);
-            console.log(transaction_money);
-        }
-
-    })
-    res.sendStatus(200)
+    yourClickHistory.push(historyBlock);
+    console.log(historyBlock);
+    res.sendStatus(200);
 })
 
 
-app.get("/transaction_history", async (req, res) => {
-    res.send(transaction_money);
+app.get("/history", async (req, res) => {
+    res.send(yourClickHistory);
 })
 
 

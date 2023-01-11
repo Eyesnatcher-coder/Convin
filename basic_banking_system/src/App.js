@@ -9,8 +9,7 @@ import GridcustomerList from './components/customerList/gridcustomerslist';
 import {logins} from './components/customerList/customerdata';
 import Paruser from './components/User/user';
 import { useState, useEffect } from 'react';
-// import History from './components/history/history';
-
+import History from './components/history/history';
 
 
 function App() {
@@ -30,7 +29,7 @@ function App() {
           <Route exact path='/' element={<><Home/><Content /></>}></Route>
           <Route exact path='/customer' element={<><Home/><CustomerList/></>}></Route>
           <Route exact path='/customerlist' element={<><Home/><GridcustomerList/></>}></Route>
-          {/* <Route exact path='/transaction_history' element={<><Home/><History/></>}></Route> */}
+          <Route exact path='/history' element={<><Home/><History/></>}></Route>
           {
             (users.length !== 0) ?
           <>

@@ -57,7 +57,7 @@ const CustomerGrid = ({ bucketname, no_of_videos }) => {
 
     return (
         <div>
-            <div style={{ backgroundColor: "#FFFFFF89", marginLeft: "20px", marginRight: "20px", marginTop: "10px", padding: "10px", height: "auto", border: "2px solid black", borderRadius: "20px", display: "flex", flexWrap: "wrap", minWidth: "300px" }}>
+            <div style={{ backgroundColor: "rgba(228, 228, 228, 1)", marginLeft: "20px", marginRight: "20px", marginTop: "10px", padding: "10px", height: "auto", border: "2px solid black", borderRadius: "20px", display: "flex", flexWrap: "wrap", minWidth: "300px" }}>
                 <div>
                     <img style={{ maxWidth: "220px", minWidth: "40px", marginRight: "20px", boxShadow: "0px 0px 10px #000000", borderTopLeftRadius: "15px", borderBottomLeftRadius: "15px" }} src={undraw} alt="mobileimage" /></div>
                 <div style={{ margin: "20px", display: "block", textAlign: "left" }}>

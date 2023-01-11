@@ -1,10 +1,11 @@
-// import axios from "axios";
+import axios from "axios";
 
-// const history_of_transaction = async () => {
-//     const resp = await axios.get(process.env.REACT_APP_API_URL + "/transaction_history")
-//      return resp.data   
-// }
+const history_of_clicking = async () => {
+    // process.env.REACT_APP_API_URL
+    const resp = await axios.get("http://localhost:3001/history")
+     return resp.data   
+}
 
-// const storage = history_of_transaction()
+const storage = history_of_clicking()
 
-// export {storage};
+export {storage};

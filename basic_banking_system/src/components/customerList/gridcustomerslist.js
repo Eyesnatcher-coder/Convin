@@ -11,6 +11,7 @@ import Modal from 'react-bootstrap/Modal';
 import React from "react";
 import Form from 'react-bootstrap/Form';
 import axios from "axios";
+import bottom from '../../bottom.svg';
 const GridcustomerList = () => {
     const [users, setUsers] = useState([]);
     useEffect(() => {
@@ -61,7 +62,7 @@ const GridcustomerList = () => {
     return (
         <div>
        
-            <div style={{ position: "sticky", marginLeft: "80%", marginTop: "10px" }}>
+            <div style={{ position: "sticky", marginLeft: "80%", marginTop: "8.5%" }}>
                 <Button style={{ padding: "10px", borderRadius: "18px", backgroundColor: "orange", border: "0px" }}  onClick={handleShow}  ref={target} onMouseOver={() => setShows(!show)}>
 
                     <Modal show={show2} onHide={handleClose}>
@@ -93,33 +94,14 @@ const GridcustomerList = () => {
                     )}
                 </Overlay>
             </div>
-            <div style={{ backgroundColor: "#FFFFFF10", margin: "5px", padding: "0.5%", borderRadius: "100px", display: "block", flexWrap: "wrap", justifyContent: "center" }}>
-                {/* <div><Button variant="warning" onClick={()=>{
-                    navigate("/customerlist")
-                }}>
-                    <svg style={{ marginBottom: "12px", margin: "8px",transform:"scale(1.2)" }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                    </svg>
-                    View Each Customer
-                </Button></div>
-                <div style={{ display: "grid", gridTemplateColumns: "auto auto auto", marginTop: "10px" }}>
-                    <div style={{ marginLeft: "80%", color: "white" }}>
-                        <h2>Name</h2>
-                    </div>
-                    <div style={{ color: "white" }}>
-                        <h2>Email</h2>
-                    </div>
-                    <div style={{ marginRight: "70%", color: "white" }}>
-                        <h2>Savings</h2>
-                    </div>
-                </div> */}
+            <div style={{paddingTop:"10px", margin: "5px", padding: "0.5%", borderRadius: "10px", display: "block", flexWrap: "wrap", justifyContent: "center", backgroundColor:"rgba(130, 0, 69, 0.8)" }}>
                 {
                     users.map((user) => {
                         return <CustomerGrid bucketname={user.bucketname} no_of_videos={user.no_of_videos} />
                     })}
 
             </div>
+            <div><img style={{position:"sticky"}} src={bottom} alt="headerbg" /></div>
 
         </div>
     );
